@@ -1,0 +1,93 @@
+
+Svm a:
+ https://colab.research.google.com/drive/15-DoFzVcLE_-hz1-ad32U54T60sAs0ba?usp=sharing
+Svm b:
+https://colab.research.google.com/drive/1gDN2nVm9rHnT3oFSY9WpEJ_oS1lZTM__?usp=sharing
+Knn
+https://colab.research.google.com/drive/1KmMRH-ywXrtzgNtF7wzmOA--vJ2LOwho?usp=sharing
+P4
+https://colab.research.google.com/drive/1Ht_MMiPmI3vKvUbC5s7PyDhMqNa9Afg6?usp=sharing
+
+
+Week 1 https://colab.research.google.com/drive/15mnVI7aPqVrXoCFGZnK6gjJ0XgkicxKB?usp=sharing
+
+ 
+Week 2 https://colab.research.google.com/drive/17-BMd07M46uZhutgC_15Z9gNSUR3tSxg?usp=sharing
+
+
+
+
+
+
+
+
+*OS & ML Lab External Exam – Instructions*
+You will get 2 questions in the exam:
+
+Question 1 – Operating Systems 
+Prepare 7 programs, you will get 1 in the exam.
+
+Question 2 – Machine Learning 
+This question has 2 parts – 2a and 2b, 
+- 2a) (Compulsory):Read & Write operations using CSV and Excel files
+- 2b)Prepare 7 programs, you will get 1 in the exam:
+
+
+
+
+- Probability, database connection, knn,svm(non-linear),k-means, conditional & unconditional, linear regression.
+
+
+CPU scheduling algorithms
+a) FCFS b) SJF c) Priority d) Round Robin
+file allocation 
+a) Sequential/Contiguous b) Indexed c) Linked
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report
+
+X, y = make_classification(
+    n_samples=200,  # Number of samples
+    n_features=2,   # Number of features
+    n_classes=2,    # Number of classes
+    n_informative=2,  # 2 features contribute to classification
+    n_redundant=0,   # No extra useless features
+    n_redundant=0,
+    random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+svm_model = SVC(kernel='linear', random_state=42)
+
+svm_model.fit(X_train, y_train)
+
+y_pred = svm_model.predict(X_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+report = classification_report(y_test, y_pred)
+
+
+print(f"Accuracy: {accuracy * 100:.2f}%")
+print("\nClassification Report:\n")
+print(report)
+def plot_decision_boundary(X, y, model):
+    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01),
+                         np.arange(y_min, y_max, 0.01))
+    Z = model.predict(np.c_[xx.ravel(), yy.ravel()])
+    Z = Z.reshape(xx.shape)
+    plt.contourf(xx, yy, Z, alpha=0.3, cmap=plt.cm.coolwarm)
+    plt.scatter(X[:, 0], X[:, 1], c=y, edgecolors='k', cmap=plt.cm.coolwarm)
+    plt.title("SVM Decision Boundary")
+    plt.xlabel("Feature 1")
+    plt.ylabel("Feature 2")
+    plt.show()
+
+
+plot_decision_boundary(X_test, y_test, svm_model)
