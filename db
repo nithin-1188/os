@@ -1,0 +1,28 @@
+import sqlite3
+
+# Connect to the SQLite database
+conn = sqlite3.connect('test.db')
+cursor = conn.cursor()
+
+# Create the table if it does not exist
+cursor.execute('''CREATE TABLE IF NOT EXISTS student (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)''')
+
+# Insert some data (Make sure this is only run once, or you'll have duplicates)
+cursor.execute("INSERT INTO student (name, age) VALUES ('ajay', 25)")
+cursor.execute("INSERT INTO student (name, age) VALUES ('ramesh', 22)")
+cursor.execute("INSERT INTO student (name, age) VALUES ('ramya', 26)")
+cursor.execute("INSERT INTO student (name, age) VALUES ('ravi', 28)")
+
+# Commit the changes to the database
+conn.commit()
+
+# Query the student table
+cursor.execute("SELECT * FROM student")
+
+# Fetch and print the rows
+rows = cursor.fetchall()
+if rows:
+    for row in rows:
+        print(row)
+else:
+    print("No rows found in 'student' table.")
