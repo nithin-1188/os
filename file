@@ -1,0 +1,74 @@
+// contigous
+#include <stdio.h>
+
+int main() {
+    int files, start, len;
+    printf("Enter number of files: ");
+    scanf("%d", &files);
+
+    for(int i = 0; i < files; i++) {
+        printf("\nEnter start block and length of file %d: ", i+1);
+        scanf("%d %d", &start, &len);
+        printf("File %d is allocated blocks: ", i+1);
+        for(int j = 0; j < len; j++)
+            printf("%d ", start + j);
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
+
+//indexed
+#include <stdio.h>
+
+int main() {
+    int files, index, blocks;
+    printf("Enter number of files: ");
+    scanf("%d", &files);
+
+    for(int i = 0; i < files; i++) {
+        printf("\nEnter index block and number of blocks for file %d: ", i+1);
+        scanf("%d %d", &index, &blocks);
+        int b[blocks];
+        printf("Enter blocks: ");
+        for(int j = 0; j < blocks; j++)
+            scanf("%d", &b[j]);
+
+        printf("File %d Index Block = %d -> ", i+1, index);
+        for(int j = 0; j < blocks; j++)
+            printf("%d ", b[j]);
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
+
+
+//linked
+#include <stdio.h>
+
+int main() {
+    int files, blocks;
+    printf("Enter number of files: ");
+    scanf("%d", &files);
+
+    for(int i = 0; i < files; i++) {
+        printf("\nEnter number of blocks for file %d: ", i+1);
+        scanf("%d", &blocks);
+        int b[blocks];
+        printf("Enter block chain: ");
+        for(int j = 0; j < blocks; j++)
+            scanf("%d", &b[j]);
+
+        printf("File %d: ", i+1);
+        for(int j = 0; j < blocks; j++)
+            printf("%d -> ", b[j]);
+        printf("NULL\n");
+    }
+
+    return 0;
+}
