@@ -1,0 +1,27 @@
+data = [
+    ("medium", "skiing", "design", "single", "twenties", "no", "highRisk"),
+    ("high", "golf", "trading", "married", "forties", "yes", "lowRisk"),
+    ("low", "speedway", "transport", "married", "thirties", "yes", "medRisk"),
+    ("medium", "football", "banking", "single", "thirties", "yes", "lowRisk"),
+    ("high", "flying", "media", "married", "fifties", "yes", "highRisk"),
+    ("low", "football", "security", "single", "twenties", "no", "medRisk"),
+    ("medium", "golf", "media", "single", "thirties", "yes", "medRisk"),
+    ("medium", "golf", "transport", "married", "forties", "yes", "lowRisk"),
+    ("high", "skiing", "banking", "single", "thirties", "yes", "highRisk"),
+    ("low", "golf", "unemployed", "married", "forties", "yes", "highRisk")
+]
+golf_count = sum(1 for entry in data if entry[1] == "golf")
+total_count = len(data)
+print("golf_count",golf_count)
+print("total count ",total_count)
+unconditional_prob_golf = golf_count / total_count
+
+medrisk_data = [entry for entry in data if entry[-1] == "medRisk"]
+single_given_medrisk_count = sum(1 for entry in medrisk_data if entry[3] == "single")
+
+print("med resik data " ,len(medrisk_data) )
+print("single_given_medrisk_count" ,single_given_medrisk_count )
+
+conditional_prob_single_given_medrisk = single_given_medrisk_count / len(medrisk_data)
+print(f"Unconditional probability of 'golf': {unconditional_prob_golf:.2f}")
+print(f"Conditional probability of 'single' given 'medRisk': {conditional_prob_single_given_medrisk:.2f}")
